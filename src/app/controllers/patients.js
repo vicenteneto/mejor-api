@@ -22,8 +22,11 @@ function create(req, res, next) {
 }
 
 function list(req, res, next) {
-  const {limit = 50, skip = 0} = req.query;
-  Patient.find()
+  const filter = req.query.email ? {email: req.query.email} : {};
+  const limit = Number.parseInt(req.query.limit) || 50;
+  const skip = Number.parseInt(req.query.skip) || 0;
+
+  Patient.find(filter)
     .skip(skip)
     .limit(limit)
     .exec()
