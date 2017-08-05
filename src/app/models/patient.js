@@ -1,8 +1,6 @@
-var mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-var Schema = mongoose.Schema;
-
-var PatientSchema = new Schema({
+const PatientSchema = new mongoose.Schema({
   email: {type: String, required: true, lowercase: true, index: {unique: true}},
   name: {type: String, required: true},
   dateOfBirth: {type: Date, required: true},
@@ -11,4 +9,4 @@ var PatientSchema = new Schema({
   weight: {type: Number, required: true, min: 0}
 });
 
-mongoose.model('Patient', PatientSchema);
+export default mongoose.model('Patient', PatientSchema);
