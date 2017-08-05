@@ -2,6 +2,7 @@ var express = require('express');
 var mongoose = require('mongoose');
 
 var router = express.Router();
+
 var Article = mongoose.model('Article');
 
 module.exports = function (app) {
