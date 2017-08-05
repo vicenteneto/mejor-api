@@ -1,8 +1,8 @@
-var glob = require('glob');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var compression = require('compression');
+var cookieParser = require('cookie-parser');
+var glob = require('glob');
+var logger = require('morgan');
 var methodOverride = require('method-override');
 
 module.exports = function (app, config) {
@@ -24,16 +24,16 @@ module.exports = function (app, config) {
     require(controller)(app);
   });
 
-  app.use(function (req, res, next) {
-    var err = new Error('Not Found');
-    err.status = 404;
-    next(err);
+  app.use(function (req, res) {
+    res.status(404).json({
+      message: 'Not Found',
+      title: 'error'
+    });
   });
 
   if (app.get('env') === 'development') {
     app.use(function (err, req, res) {
-      res.status(err.status || 500);
-      res.render('error', {
+      res.status(err.status || 500).json({
         message: err.message,
         error: err,
         title: 'error'
@@ -42,8 +42,7 @@ module.exports = function (app, config) {
   }
 
   app.use(function (err, req, res) {
-    res.status(err.status || 500);
-    res.render('error', {
+    res.status(err.status || 500).json({
       message: err.message,
       error: {},
       title: 'error'
