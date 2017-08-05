@@ -1,7 +1,7 @@
 var path = require('path');
 
 var rootPath = path.normalize(__dirname + '/..');
-var env = process.env.NODE_ENV || 'development';
+var env = process.env.NODE_ENV || 'production';
 
 var config = {
   development: {
@@ -9,7 +9,7 @@ var config = {
     app: {
       name: 'mejor-api'
     },
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 5000,
     db: 'mongodb://localhost/mejor-api-development'
   },
 
@@ -18,7 +18,7 @@ var config = {
     app: {
       name: 'mejor-api'
     },
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 5000,
     db: 'mongodb://localhost/mejor-api-test'
   },
 
@@ -27,8 +27,8 @@ var config = {
     app: {
       name: 'mejor-api'
     },
-    port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/mejor-api-production'
+    port: process.env.PORT || 5000,
+    db: 'mongodb://<dbuser>:<dbpassword>@<dbhost>:<dbport>/mejor_db'
   }
 };
 
