@@ -5,6 +5,7 @@ import express from 'express';
 import logger from 'morgan';
 import methodOverride from 'method-override';
 
+import appointments from '../app/routes/appointments';
 import patients from '../app/routes/patients';
 
 const app = express();
@@ -20,6 +21,7 @@ app.use(cookieParser());
 app.use(compression());
 app.use(methodOverride());
 
+app.use('/api/appointments', appointments);
 app.use('/api/patients', patients);
 
 app.use((req, res) => {

@@ -1,5 +1,6 @@
 import Patient from '../models/patient';
 
+
 function create(req, res, next) {
   Patient.findOne({email: req.body.email}).then((patient) => {
     if (patient === null) {
@@ -34,4 +35,19 @@ function list(req, res, next) {
       (err) => next(err));
 }
 
-export default {create, list}
+function loadByEmail(req, res, next, email) {
+  Patient.findOne({email: email})
+    .then((patient) => {
+      if (patient) {
+        req.patient = patient;
+        return next();
+      } else {
+        res.status(404).json({
+          message: 'Não foi encontrado nenhum paciente com este email: ' + req.params.email,
+          title: 'error'
+        });
+      }
+    }, (err) => next(err));
+}
+
+export default {create, list, loadByEmail}
