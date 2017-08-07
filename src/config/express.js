@@ -1,6 +1,7 @@
 import bodyParser from 'body-parser';
 import compression from 'compression';
 import cookieParser from 'cookie-parser';
+import cors from 'cors';
 import express from 'express';
 import logger from 'morgan';
 import methodOverride from 'method-override';
@@ -20,6 +21,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(compression());
 app.use(methodOverride());
+app.use(cors());
 
 app.use('/api/appointments', appointments);
 app.use('/api/patients', patients);
