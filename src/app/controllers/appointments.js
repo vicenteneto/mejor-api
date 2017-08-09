@@ -2,12 +2,12 @@ import Appointment from '../models/appointment';
 import Patient from '../models/patient';
 import Schedule from '../models/schedule';
 
-function possibleDates(appointments, patient, callback) {
+function possibleDates(appointments, callback) {
   Schedule.find().then((schedules) => {
     let availableDates = schedules.map((schedule) => schedule.date);
     appointments.forEach((appointment) => {
       availableDates = availableDates.filter((date) => {
-        return appointment.email === patient.email ? appointment.date.getDate() !== date.getDate() : appointment.date.getTime() !== date.getTime();
+        return appointment.date.getTime() !== date.getTime();
       });
     });
 
@@ -23,7 +23,7 @@ function create(req, res) {
           if (patient) {
             Appointment.find()
               .then((appointments) => {
-                possibleDates(appointments, patient, (dates) => {
+                possibleDates(appointments, (dates) => {
                   if (dates.find((date) => date.getTime() === req.body.date.getTime())) {
                     Appointment.create({
                       email: req.body.email,
@@ -65,7 +65,7 @@ function list(req, res, next) {
 function availables(req, res, next) {
   Appointment.find()
     .then((appointments) => {
-      possibleDates(appointments, req.patient, (dates) => res.json(dates));
+      possibleDates(appointments, (dates) => res.json(dates));
     }, (err) => next(err));
 }
 
