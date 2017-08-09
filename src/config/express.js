@@ -8,6 +8,7 @@ import methodOverride from 'method-override';
 
 import appointments from '../app/routes/appointments';
 import patients from '../app/routes/patients';
+import schedules from '../app/routes/schedules'
 
 const app = express();
 
@@ -25,6 +26,7 @@ app.use(cors());
 
 app.use('/api/appointments', appointments);
 app.use('/api/patients', patients);
+app.use('/api/schedules', schedules);
 
 app.use((req, res) => {
   res.status(404).json({
