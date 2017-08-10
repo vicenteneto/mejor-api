@@ -1,19 +1,9 @@
-const env = process.env.NODE_ENV || 'production';
+const env = process.env.NODE_ENV || 'development';
 
 const config = {
   development: {
     port: process.env.PORT || 5000,
-    db: 'mongodb://localhost/mejor-api-development'
-  },
-
-  test: {
-    port: process.env.PORT || 5000,
-    db: 'mongodb://localhost/mejor-api-test'
-  },
-
-  production: {
-    port: process.env.PORT || 5000,
-    db: 'mongodb://<dbuser>:<dbpassword>@<dbhost>:<dbport>/mejor_db'
+    db: 'mongodb://mejor:m3j0r@ds135983.mlab.com:35983/mejor_db'
   }
 };
 
