@@ -8,7 +8,7 @@ import methodOverride from 'method-override';
 
 import appointments from '../app/routes/appointments';
 import patients from '../app/routes/patients';
-import schedules from '../app/routes/schedules'
+import schedules from '../app/routes/schedules';
 
 const app = express();
 
