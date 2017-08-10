@@ -1,8 +1,8 @@
 import express from 'express';
-import validate from 'express-validation'
+import validate from 'express-validation';
 
-import controller from '../controllers/patients'
-import validations from './validation/patients'
+import controller from '../controllers/patients';
+import validations from './validation/patients';
 
 const router = express.Router();
 

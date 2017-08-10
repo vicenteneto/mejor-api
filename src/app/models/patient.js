@@ -6,7 +6,8 @@ const PatientSchema = new mongoose.Schema({
   dateOfBirth: {type: Date, required: true},
   location: {type: String, required: true},
   height: {type: Number, required: true, min: 0},
-  weight: {type: Number, required: true, min: 0}
+  weight: {type: Number, required: true, min: 0},
+  createdAt: {type: Date, required: true}
 });
 
 export default mongoose.model('Patient', PatientSchema);

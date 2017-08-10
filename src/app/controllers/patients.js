@@ -5,6 +5,7 @@ function create(req, res, next) {
   Patient.findOne({email: req.body.email}).then((patient) => {
     if (patient === null) {
       Patient.create({
+        createdAt: new Date(),
         email: req.body.email,
         name: req.body.name,
         dateOfBirth: req.body.dateOfBirth,

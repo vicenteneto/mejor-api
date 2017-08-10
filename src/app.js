@@ -1,14 +1,25 @@
 import bluebird from 'bluebird';
 import mongoose from 'mongoose';
+import schedule from 'node-schedule';
 
-import app from './config/express'
+import app from './config/express';
 import config from './config/config';
-import Schedule from './app/models/schedule'
+import Patient from './app/models/patient';
+import Schedule from './app/models/schedule';
 
 mongoose.Promise = bluebird;
 mongoose.connect(config.db, {useMongoClient: true});
 mongoose.connection.on('error', () => {
   throw new Error('unable to connect to database at ' + config.db);
+});
+
+schedule.scheduleJob('0 0 3 * * *', function () {
+  let now = new Date();
+  now.setDate(now.getDate() - 3);
+
+  Patient.find({createdAt: {$lte: now}}, function (err, docs) {
+    docs.remove();
+  });
 });
 
 Schedule.find().then((schedules) => {
